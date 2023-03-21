@@ -34,7 +34,7 @@ const chatCompletion = async (req, res) => {
         const completion = await openai.createChatCompletion({
             model: "gpt-3.5-turbo",
             messages: [
-                { "role": "system", "content": "You are a helpful assistant that always answers in French." },
+                { "role": "system", "content": "The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly and always answers in French." },
                 { "role": "system", "content": "Always before answering, take into consideration these User's information : " + props + " !" },
                 // Use the messages array to pass in all messages, including the user's message
                 ...messages,

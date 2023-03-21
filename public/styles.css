@@ -33,18 +33,21 @@ body {
     padding: 10px 15px;
     max-width: 70%;
     margin: 10px auto;
+    display: inline-block;
 }
 
 .chat-message.user {
     background-color: #007bff;
     color: #fff;
-    align-self: flex-end;
+    float: left;
+    clear: both;
 }
 
 .chat-message.bot {
     background-color: #e9ecef;
     color: #000;
-    align-self: flex-start;
+    float: right;
+    clear: both;
 }
 
 .form-control:focus {

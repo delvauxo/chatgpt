@@ -2,10 +2,6 @@ const { Configuration, OpenAIApi } = require("openai");
 const apiKey = require('dotenv-flow').config().parsed.OPENAI_API_KEY;
 const oliver = require('../data/oliver');
 
-
-console.log(oliver);
-
-
 // Getting User's properties as full string separated by commas.
 let props = '';
 
@@ -15,8 +11,6 @@ for (const prop in oliver) {
         props += ", " + element;
     }
 }
-
-console.log(props);
 
 const configuration = new Configuration({
     apiKey: apiKey,
@@ -39,11 +33,6 @@ const chatCompletion = async (req, res) => {
             ],
         });
         const message = completion.data.choices[0].message;
-
-
-        console.log(message);
-
-
         res.status(200).json({ message });
     } catch (error) {
         console.log(error);

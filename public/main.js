@@ -18,6 +18,8 @@ form.addEventListener('submit', async (event) => {
         top: chatBox.scrollHeight,
         behavior: 'smooth'
     });
+    // reset the prompt with the placeholder
+    input.value = '';
 
     const response = await axios.post('/api/chatgpt', { text: userInput });
     const message = response.data.message.content;
@@ -38,6 +40,5 @@ form.addEventListener('submit', async (event) => {
     });
 
     form.classList.remove('show-spinner');
-    input.value = '';
 });
 

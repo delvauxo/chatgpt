@@ -13,6 +13,12 @@ form.addEventListener('submit', async (event) => {
     userMessage.innerHTML = userInput;
     chatBox.appendChild(userMessage);
 
+    // scroll to the bottom of the chat box right (request)
+    chatBox.scrollTo({
+        top: chatBox.scrollHeight,
+        behavior: 'smooth'
+    });
+
     const response = await axios.post('/api/chatgpt', { text: userInput });
     const message = response.data.message.content;
     const formattedMessage = message.replace(/\n/g, '<br>');
@@ -25,7 +31,7 @@ form.addEventListener('submit', async (event) => {
     // append the new chat message element to the chat box
     chatBox.appendChild(chatMessage);
 
-    // scroll to the bottom of the chat box
+    // scroll to the bottom of the chat box right (response)
     chatBox.scrollTo({
         top: chatBox.scrollHeight,
         behavior: 'smooth'

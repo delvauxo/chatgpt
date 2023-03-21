@@ -34,11 +34,16 @@ const chatCompletion = async (req, res) => {
             model: "gpt-3.5-turbo",
             messages: [
                 { "role": "system", "content": "You are a helpful assistant that always answers in French." },
-                { "role": "system", "content": "User's information : " + props + " !" },
+                { "role": "system", "content": "Always before answering, take into consideration these User's information : " + props + " !" },
                 { role: "user", content: req.body.text }
             ],
         });
         const message = completion.data.choices[0].message;
+
+
+        console.log(message);
+
+
         res.status(200).json({ message });
     } catch (error) {
         console.log(error);

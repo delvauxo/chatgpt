@@ -18,8 +18,9 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
-// Declare an array to store the messages
-let messages = [];
+// Declare an array to store the messages and set a maximum size
+const messages = [];
+const MAX_MESSAGES = 15;
 
 // Modify the chatCompletion function to add the user's message to the array
 const chatCompletion = async (req, res) => {
@@ -30,6 +31,11 @@ const chatCompletion = async (req, res) => {
 
         // Add the user's message to the array
         messages.push({ role: "user", content: req.body.text });
+
+        // Remove the oldest message(s) if the array is too big
+        if (messages.length > MAX_MESSAGES) {
+            messages.splice(0, messages.length - MAX_MESSAGES);
+        }
 
         const completion = await openai.createChatCompletion({
             model: "gpt-3.5-turbo",
@@ -46,12 +52,18 @@ const chatCompletion = async (req, res) => {
         // Add the chatBot's message to the array
         messages.push(message);
 
+        // Remove the oldest message(s) if the array is too big
+        if (messages.length > MAX_MESSAGES) {
+            messages.splice(0, messages.length - MAX_MESSAGES);
+        }
+
         res.status(200).json({ message });
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: "Something went wrong." });
     }
 };
+
 
 
 module.exports = { chatCompletion };
